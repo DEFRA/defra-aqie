@@ -1,0 +1,21 @@
+
+{% from "govuk-frontend/components/phase-banner/macro.njk" import govukPhaseBanner %}
+
+{% block pageTitle %}
+{{ title }} – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukPhaseBanner({
+    tag: {
+      text: "BETA"
+    },
+    html: 'This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.'
+  }) }}
+  {% if displayBacklink %}
+  {{ govukBackLink({
+    text: "",
+    href: "../location"
+  }) }}
+  {% endif %}
+  {% endblock %}

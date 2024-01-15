@@ -1,0 +1,16 @@
+{% extends "govuk-frontend/template.njk" %}
+
+
+{% block beforeContent %}
+  {{ govukPhaseBanner({
+    tag: {
+      text: "BETA"
+    },
+    html: 'This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.'
+  }) }}
+  {{ govukBackLink({
+    text: "Change location",
+    href: "location"
+  }) }}
+  {% endblock %}
+

@@ -1,13 +1,17 @@
 {% extends "govuk-frontend/template.njk" %}
 {% from "govuk-frontend/components/button/macro.njk" import govukButton -%}
 {% from "govuk-frontend/components/phase-banner/macro.njk" import govukPhaseBanner %}
+{% from "govuk-frontend/components/back-link/macro.njk" import govukBackLink %}
 {% block pageTitle %}
 Gov UK Air  Quality Beta Starter
 {% endblock %}
-
+<base href="/" />
 {% block head %}
+
+<meta content="text/html; charset=UTF-8; X-Content-Type-Options=nosniff" http-equiv="Content-Type" />
   <link rel="stylesheet" href="/assets/govuk-frontend.min.css">
   <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/application.css">
 {% endblock %}
 {% block beforeContent %}
   {{ govukPhaseBanner({
@@ -16,21 +20,13 @@ Gov UK Air  Quality Beta Starter
     },
     html: 'This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.'
   }) }}
-
-  {% if displayBreadcrumbs %}
-    {{ govukBreadcrumbs({
-      items: [{
-        href: "https://www.gov.uk",
-        text: "Home"
-      }, {
-        href: "https://www.gov.uk/environment",
-        text: "Environment"
-      }, {
-        href: "https://www.gov.uk/environment/pollution-and-environmental-quality",
-        text: "Pollution and environmental quality"
-      }]
-    }) }}
+  {%if locationType == "single location" %}
+    {{ govukBackLink({
+    text: "Change location",
+    href: "/search-location"
+  }) }}
   {% endif %}
+
 {% endblock %}
 {% block content %}
   <div class="govuk-grid-row">
@@ -54,14 +50,17 @@ Gov UK Air  Quality Beta Starter
         isStartButton: true
       }) }}
     </div>
-  </div>
-     <script src="/assets/jquery-3.6.0.min.js"></script>
-     <script type="module" src="/assets/govuk-frontend.min.js"></script>
+  </div>  
+
+{% endblock %}
+{% block bodyEnd %}
+    <script type="module" src="/assets/jquery-3.6.0.min.js"></script>
+    <script type="module" src="/assets/govuk-frontend.min.js"></script>
+    <script type="module" src="/assets/scripts/toggletips.js"></script>
     <script type="module">
           import { initAll } from '/assets/govuk-frontend.min.js';
           initAll();
     </script>
-    
 {% endblock %}
 {% block footer %}
     {{ govukFooter({

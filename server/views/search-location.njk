@@ -6,19 +6,19 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
 
+{% from "govuk-frontend/components/error-summary/macro.njk" import govukErrorSummary %}
+ {% if errors %}
+ <div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+{{ govukErrorSummary(errors) }}
+  </div>
+</div>
+ {% endif %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
     <form action="/location" method="post">
-      {{ appSearch({
-          label: {
-              text: "Where do you want to check?",
-              classes: "govuk-label--l govuk-!-margin-bottom-6",
-              isPageHeading: true
-          },
-          hint: {
-              text: "Enter a location or postcode"
-          },
-          id: "location",
-          name: 'location'
-      }) }}
+      {{ appSearch(searchParams) }}
       <!-- Hidden input to pass the air quality value -->
       <input type="hidden" name="aq" value="{{ airQuality.value }}" />
   </form>

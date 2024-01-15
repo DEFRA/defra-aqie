@@ -36,7 +36,7 @@
     {% endblock %}
 
     {% block header %}
-      {{ govukHeader({}) }}
+      {{ govukHeader({serviceName: name if name else serviceName}) }}
     {% endblock %}
 
     {% block main %}

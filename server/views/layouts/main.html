@@ -1,0 +1,37 @@
+{% from "components/search/macro.njk" import appSearch %}
+{% from "components/pollutant/macro.njk" import appPollutant %}
+
+
+{% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
+
+{% block pageTitle %}
+{% if title %}{{ title }} – {% endif %}
+{{ serviceName }} – GOV.UK
+{% endblock %}
+
+
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+
+{% block beforeContent %}
+  {{ govukPhaseBanner({
+    tag: {
+      text: "BETA"
+    },
+    html: 'This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.'
+  }) }}
+
+  {% if displayBreadcrumbs %}
+    {{ govukBreadcrumbs({
+      items: [{
+        href: "https://www.gov.uk",
+        text: "Home"
+      }, {
+        href: "https://www.gov.uk/environment",
+        text: "Environment"
+      }, {
+        href: "https://www.gov.uk/environment/pollution-and-environmental-quality",
+        text: "Pollution and environmental quality"
+      }]
+    }) }}
+  {% endif %}
+{% endblock %}

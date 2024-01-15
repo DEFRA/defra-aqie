@@ -11,8 +11,12 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "preLaunchTask": "tsc: watch - tsconfig.json",
-            "program": "${workspaceFolder}/dist-server/app.js",
+            "program": "${workspaceFolder}\\server\\app.ts",
+            "runtimeArgs": ["-r", "ts-node/register", "-r", "tsconfig-paths/register"],
+            "console": "integratedTerminal",
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ]
         }
     ]
 }
