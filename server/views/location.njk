@@ -18,7 +18,9 @@
   <script src="/assets/scripts/toggletips.js"></script>
 {% endblock %}
 
+{% if onlyShowTwoPages == "Yes" %}
 {% block content %}
+<div><h1 class="govuk-body" style="color:red;">COMING SOON...</h1></div>
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds-from-desktop govuk-grid-column-full">
       <h1 class="govuk-heading-{{ pageHeadingSize }}">
@@ -29,7 +31,7 @@
       </h1>
     </div>
   </div>
-  <div class="govuk-grid-row">
+  {# <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds-from-desktop govuk-grid-column-full govuk-!-margin-bottom-9">
       {% include "includes/daqi.njk" %}
       {% if airQuality.value >= 1 and airQuality.value <= 3 %}
@@ -67,7 +69,7 @@
       <h2 class="govuk-heading-m">Air pollutants monitored near by</h2>
       {% include "includes/monitoring-sites.njk" %}
     </div>
-  </div>
+  </div> #}
 <noscript>
 <style>
 body, html{overflow:hidden}
@@ -93,3 +95,4 @@ body, html{overflow:hidden}
 </div>
 </noscript>
 {% endblock %}
+{% endif %}

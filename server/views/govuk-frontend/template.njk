@@ -36,7 +36,11 @@
     {% endblock %}
 
     {% block header %}
+    {%if page == "homepage"%}
+      {{ govukHeader({serviceName: ""}) }}
+    {% else %}
       {{ govukHeader({serviceName: name if name else serviceName}) }}
+    {% endif%}
     {% endblock %}
 
     {% block main %}
