@@ -102,10 +102,7 @@ async function getLocationData(
     });
 
     // If it's a partial postcode and there are matches, use the first match and adjust the title
-    if (
-      partialPostcodePattern.test(originalUserLocation.toUpperCase()) &&
-      matches.length > 0
-    ) {
+    if (matches.length > 0 && originalUserLocation.length >= 2) {
       matches[0].GAZETTEER_ENTRY.NAME1 = originalUserLocation.toUpperCase(); // Set the name to the partial postcode
       matches = [matches[0]];
     }
@@ -123,7 +120,7 @@ async function getLocationData(
         locationType: 'single location',
         serviceName: 'Check local air quality',
       });
-    } else if (matches.length > 1) {
+    } else if (matches.length > 1 && originalUserLocation.length > 3) {
       res.render('multiple-locations.njk', {
         results: matches,
         userLocation: originalUserLocation,
