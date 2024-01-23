@@ -22,10 +22,9 @@ async function getLocationData(
   res: Response,
   next: NextFunction
 ) {
+  const originalUserLocation = req.body.location.trim();
   try {
-    const originalUserLocation = req.body.location.trim();
     let userLocation = originalUserLocation.toUpperCase(); // Use 'let' to allow reassignment
-
     // Regex patterns to check for full and partial postcodes
     const fullPostcodePattern = /^([A-Z]{1,2}\d[A-Z\d]? ?\d[A-Z]{2})$/;
     const partialPostcodePattern = /^([A-Z]{1,2}\d[A-Z\d]?)$/;
@@ -138,8 +137,9 @@ async function getLocationData(
     }
   } catch (error) {
     console.error('Error fetching data:', error);
-    res.status(500).render('error.njk', {
+    res.status(400).render('error.njk', {
       error: 'An error occurred while fetching location data.',
+      userLocation: originalUserLocation,
     });
   }
 }
