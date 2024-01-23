@@ -101,7 +101,11 @@ async function getLocationData(
     });
 
     // If it's a partial postcode and there are matches, use the first match and adjust the title
-    if (matches.length > 0 && originalUserLocation.length >= 2) {
+    if (
+      partialPostcodePattern.test(originalUserLocation.toUpperCase()) &&
+      matches.length > 0 &&
+      originalUserLocation.length <= 3
+    ) {
       matches[0].GAZETTEER_ENTRY.NAME1 = originalUserLocation.toUpperCase(); // Set the name to the partial postcode
       matches = [matches[0]];
     }
