@@ -1,5 +1,6 @@
-/** @type {import('ts-jest').JestConfigWithTsJest} */
-module.exports = {
+import type { Config } from '@jest/types';
+
+const config: Config.InitialOptions = {
   preset: 'ts-jest',
   testEnvironment: 'node',
   coverageDirectory: 'coverage',
@@ -13,16 +14,12 @@ module.exports = {
     },
   },
   clearMocks: true,
-  coverageProvider: "v8",
+  coverageProvider: 'v8',
   transformIgnorePatterns: [],
-  moduleNameMapper: {
-    'server/(.*)': '<rootDir/server/$1',
-  },
   moduleDirectories: ['node_modules', 'server'],
-  testMatch: [
-    "**/__tests__/**/*.[jt]s?(x)",
-    "**/?(*.)+(spec|test).[tj]s?(x)"
-  ],
+  testMatch: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[tj]s?(x)'],
   verbose: true,
   forceExit: true,
 };
+
+export default config;

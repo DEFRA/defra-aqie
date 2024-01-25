@@ -3,7 +3,7 @@ import app from '../../app';
 
 describe('homepage', () => {
   describe('get homepage route', () => {
-    describe('given the homepage does not exist', () => {
+    describe('given the homepage exists', () => {
       it('should return a 200', async () => {
         const res = await request(app).get('/location-search');
         expect(res.status).toBe(200);
