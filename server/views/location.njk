@@ -7,16 +7,13 @@
 {% from "govuk-frontend/components/details/macro.njk" import govukDetails -%}
 {% from "components/pollutant/macro.njk" import appPollutant %}
 {% from "components/toggletip/macro.njk" import toggletip %}
+{% from "components/aq-levels-table/macro.njk" import aqLevelsTable %}
 
 
 {% set caption = "" %}
 {% set title = result.GAZETTEER_ENTRY.NAME1 + ", " + (result.GAZETTEER_ENTRY.COUNTY_UNITARY if result.GAZETTEER_ENTRY.COUNTY_UNITARY else result.GAZETTEER_ENTRY.DISTRICT_BOROUGH) %}
 
 {% set pageHeadingSize = pageHeadingSize or "xl" %}
-
-{% block pageScripts %}
-  <script src="/assets/scripts/toggletips.js"></script>
-{% endblock %}
 
 {% if onlyShowTwoPages == "Yes" %}
 {% block content %}
@@ -31,8 +28,8 @@
       </h1>
     </div>
   </div>
-  {# <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds-from-desktop govuk-grid-column-full govuk-!-margin-bottom-9">
+  <div class="govuk-grid-row">
+    {# <div class="govuk-grid-column-two-thirds-from-desktop govuk-grid-column-full govuk-!-margin-bottom-9">
       {% include "includes/daqi.njk" %}
       {% if airQuality.value >= 1 and airQuality.value <= 3 %}
           <h2 class="govuk-heading-m">Advice for {{ airQuality.readableBand }} levels of air pollution</h2>
@@ -67,8 +64,8 @@
       {% include "includes/pollutants.njk" %}
       <hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-bottom-6 govuk-!-margin-top-6">
       <h2 class="govuk-heading-m">Air pollutants monitored near by</h2>
-      {% include "includes/monitoring-sites.njk" %}
-    </div>
-  </div> #}
+      {% include "includes/monitoring-sites.html" %}
+    </div> #}
+  </div>
 {% endblock %}
 {% endif %}

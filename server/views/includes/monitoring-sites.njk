@@ -9,7 +9,7 @@
     '',
     'More information about measurement',
     'Readings are measured every hour. The unit µg/&#13221; stands for micrograms (one millionth of a gram) per cubic metre of air.',
-    'Latest μg/&#13221;'
+    'Latest'
   )}}
 {% endset %}
 
@@ -41,38 +41,38 @@
   )}}
 {% endset %}
   <h3 class="govuk-heading-s govuk-!-margin-bottom-1">{{ siteNameToggletip | safe }}</h3>
-  <p class="govuk-caption-m govuk-!-margin-bottom-2">{{ site.distance }} miles away</p>
+  <p class="govuk-caption-m govuk-!-margin-bottom-3">{{ site.distance }} miles away</p>
   {% set rows = [] %}
   {% for pollutant in site.pollutants %}
-      {% set pollutantDetail = pollutantTypes[pollutant.type] %} {# Retrieve details from pollutantTypes #}
+      {% set pollutantDetail = pollutantTypes[pollutant.type] %}
       {% set row = [
           { 
-              html: "<p class='govuk-body govuk-!-margin-bottom-1'><a href='" + pollutantDetail.href + "'>" + pollutantDetail.title + "</a></p><p class='govuk-caption-s govuk-!-margin-bottom-1'></p>",
-              classes: "align-middle" 
+              html: "<a class='govuk-!-margin-bottom-1' href='" + pollutantDetail.href + "'>" + pollutantDetail.title + "</a><span class='govuk-caption-s govuk-!-margin-bottom-1'>Low range " + pollutantDetail.low_range + "</span>",
+              classes: "defra-aq-levels-table__cell--pollutant" 
           },
           { 
-              html: "<p class='govuk-body govuk-!-margin-bottom-1'>" + pollutant.measurement + "</p><p class='govuk-caption-s govuk-!-margin-bottom-1'>Low range " + pollutantDetail.low_range + "</p>",
-              classes: "align-middle" 
+              html: (pollutant.measurement | int) +  " <span class='govuk-!-font-size-16 govuk-!-font-weight-regular'>μg/&#13221;</span>",
+              classes: "defra-aq-levels-table__cell--reading" 
           },
           { 
               html: pollutant.trend, 
-              classes: "align-middle" 
+              classes: "defra-aq-levels-table__cell--trend" 
           },
           { 
               html: "<strong class='daqi-tag daqi-tag--" + (pollutant.aqi if pollutant.aqi else "default-aqi-value") + "'>" + pollutant.band + "</strong>",
-              classes: "align-middle" 
+              classes: "defra-aq-levels-table__cell--level" 
           }
       ] %}
       {% set _ = rows.push(row) %}
   {% endfor %}
-  {{ govukTable({
+  {{ aqLevelsTable({
       classes: "govuk-!-margin-bottom-2",
       firstCellIsHeader: false,
       head: [
-        { text: "Pollutant"},
-        { html: measurementToggletip, classes: "govuk-!-width-one-third" },
-        { html: trendToggletip },
-        { html: levelToggletip }
+        { text: "Pollutant", classes: "defra-aq-levels-table__cell--pollutant"},
+        { html: measurementToggletip, classes: "defra-aq-levels-table__cell--reading" },
+        { html: trendToggletip, classes: "defra-aq-levels-table__cell--trend" },
+        { html: levelToggletip, classes: "defra-aq-levels-table__cell--level" }
       ],
       rows: rows
   }) }}
